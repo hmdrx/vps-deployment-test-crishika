@@ -1,0 +1,51 @@
+:root {
+  font-size: 62.5%;
+  --primary: #25bf77;
+  --primary-variant: #1d975e;
+  --secondary: #da4088;
+  --secondary-variant: #b92369;
+  --bg-dark: #b8f1d6;
+  --bg: #c1ffe2;
+  --bg-light: #e7faf1;
+  --dark: #344457;
+  --gray: #d2e2e8;
+
+  --title: 5rem;
+  --subtitle: 2.1rem;
+  --body-text: 1.6rem;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style: none;
+}
+body {
+  font-family: 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--bg-light);
+
+ 
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+::-webkit-scrollbar {
+  width: 0.6rem;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 0.5rem;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-variant);
+}

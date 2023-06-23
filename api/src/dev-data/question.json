@@ -1,0 +1,632 @@
+[
+  {
+    "question": "What is the name of the first man to climb Mount Everest?",
+    "options": ["Reinhold Messner", "Tenzing Norgay", "Longwong dan"],
+    "correctAns": "Edmund Hillary",
+    "subjectCode": 101,
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is the capital of France?",
+    "options": ["Madrid", "Rome", "Berlin"],
+    "correctAns": "Paris",
+    "subjectCode": 102,
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is the largest organ in the human body?",
+    "options": ["Liver", "Lungs", "Heart"],
+    "correctAns": "Skin",
+    "subjectCode": 103,
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is the name of the largest desert in the world?",
+    "options": ["Gobi", "Arabian", "Mojave"],
+    "correctAns": "Sahara",
+    "subjectCode": 104,
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is the chemical symbol for gold?",
+    "options": ["Ag", "Pt", "Cu"],
+    "correctAns": "Au",
+    "subjectCode": 105,
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which country is also known as the 'Land of the Rising Sun'?",
+    "options": ["China", "Thailand", "South Korea"],
+    "correctAns": "Japan",
+    "subjectCode": 106,
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is the name of the famous ship that sunk on its maiden voyage?",
+    "options": ["Queen Elizabeth", "Lusitania", "Hindenburg"],
+    "correctAns": "Titanic",
+    "subjectCode": 107,
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is the capital of Canada?",
+    "options": ["Toronto", "Vancouver", "Montreal"],
+    "correctAns": "Ottawa",
+    "subjectCode": 108,
+    "difficulty": "easy"
+  },
+  {
+    "question": "Who is known as the 'Queen of Pop'?",
+    "options": ["Britney Spears", "Beyonce", "Taylor Swift"],
+    "correctAns": "Madonna",
+    "subjectCode": 109,
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is the name of the famous university located in Cambridge, England?",
+    "options": [
+      "Oxford University",
+      "University of Manchester",
+      "University of Edinburgh"
+    ],
+    "correctAns": "University of Cambridge",
+    "subjectCode": 110,
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the capital of Germany?",
+    "options": ["Munich", "Hamburg", "Cologne"],
+    "correctAns": "Berlin",
+    "subjectCode": 101,
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is the name of the highest mountain in Africa?",
+    "options": ["Mount Everest", "Mount Fuji", "Mount Denali"],
+    "correctAns": "Mount Kilimanjaro",
+    "subjectCode": 102,
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which planet in our solar system is closest to the Sun?",
+    "options": ["Venus", "Earth", "Mars"],
+    "correctAns": "Mercury",
+    "subjectCode": 103,
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is the name of the smallest country in the world?",
+    "options": ["Liechtenstein", "Monaco", "San Marino"],
+    "correctAns": "Vatican City",
+    "subjectCode": 104,
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is the chemical symbol for oxygen?",
+    "options": ["N", "C", "H"],
+    "correctAns": "O",
+    "subjectCode": 105,
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is the name of the famous canal that connects the Atlantic Ocean to the Pacific Ocean?",
+    "options": ["Suez Canal", "Kiel Canal", "Cape Cod Canal"],
+    "correctAns": "Panama Canal",
+    "subjectCode": 106,
+    "difficulty": "easy"
+  },
+  {
+    "question": "Who wrote the famous novel 'Pride and Prejudice'?",
+    "options": ["Emily Bronte", "Charlotte Bronte", "Virginia Woolf"],
+    "correctAns": "Jane Austen",
+    "subjectCode": 107,
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is the capital of China?",
+    "options": ["Shanghai", "Guangzhou", "Chongqing"],
+    "correctAns": "Beijing",
+    "subjectCode": 108,
+    "difficulty": "easy"
+  },
+  {
+    "question": "Who is the founder of Microsoft?",
+    "options": ["Steve Jobs", "Mark Zuckerberg", "Jeff Bezos"],
+    "correctAns": "Bill Gates",
+    "subjectCode": 109,
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is the name of the famous monument in India that is considered a symbol of love?",
+    "options": ["Golden Temple", "Hawa Mahal", "Lotus Temple"],
+    "correctAns": "Taj Mahal",
+    "subjectCode": 101,
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the name of the famous river in Egypt?",
+    "options": ["Euphrates River", "Amazon River", "Yellow River"],
+    "correctAns": "Nile River",
+    "subjectCode": 102,
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the name of the famous university located in Cambridge, England?",
+    "options": [
+      "Oxford University",
+      "University of Manchester",
+      "University of Edinburgh"
+    ],
+    "correctAns": "University of Cambridge",
+    "subjectCode": 110,
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the name of the famous novel written by Harper Lee?",
+    "options": ["The Catcher in the Rye", "The Great Gatsby", "1984"],
+    "correctAns": "To Kill a Mockingbird",
+    "subjectCode": 107,
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the name of the famous waterfall located on the border of Brazil and Argentina?",
+    "options": ["Angel Falls", "Niagara Falls", "Victoria Falls"],
+    "correctAns": "Iguazu Falls",
+    "subjectCode": 102,
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the name of the famous painting by Leonardo da Vinci that depicts a woman with a mysterious smile?",
+    "options": ["The Last Supper", "The Scream", "The Starry Night"],
+    "correctAns": "The Mona Lisa",
+    "subjectCode": 107,
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the name of the famous mountain range that spans from Canada to New Mexico?",
+    "options": ["Andes Mountains", "Himalayan Mountains", "Alps Mountains"],
+    "correctAns": "Rocky Mountains",
+    "subjectCode": 102,
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the name of the famous American inventor who is credited with inventing the light bulb?",
+    "options": ["Alexander Graham Bell", "Nikola Tesla", "Benjamin Franklin"],
+    "correctAns": "Thomas Edison",
+    "subjectCode": 109,
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the name of the famous European city known for its canals, bicycles, and museums?",
+    "options": ["Paris", "Rome", "Berlin"],
+    "correctAns": "Amsterdam",
+    "subjectCode": 108,
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the name of the famous Greek epic poem attributed to Homer?",
+    "options": ["The Odyssey", "The Aeneid", "The Divine Comedy"],
+    "correctAns": "The Iliad",
+    "subjectCode": 107,
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the name of the famous Australian opera house located in Sydney?",
+    "options": ["Royal Opera House", "La Scala", "The Met"],
+    "correctAns": "Sydney Opera House",
+    "subjectCode": 105,
+    "difficulty": "hard"
+  },
+  {
+    "question": "What is the name of the famous African-American woman who refused to give up her seat on a bus in Montgomery, Alabama?",
+    "options": ["Harriet Tubman", "Sojourner Truth", "Maya Angelou"],
+    "correctAns": "Rosa Parks",
+    "subjectCode": 107,
+    "difficulty": "hard"
+  },
+  {
+    "question": "What is the name of the famous U.S. document that declared independence from Great Britain in 1776?",
+    "options": [
+      "The Constitution",
+      "The Bill of Rights",
+      "The Articles of Confederation"
+    ],
+    "correctAns": "The Declaration of Independence",
+    "subjectCode": 104,
+    "difficulty": "hard"
+  },
+  {
+    "question": "What is the name of the famous mathematical formula that describes the relationship between a circle's circumference and diameter?",
+    "options": [
+      "Euler's Formula",
+      "The Pythagorean Theorem",
+      "Newton's Law of Gravity"
+    ],
+    "correctAns": "Pi",
+    "subjectCode": 106,
+    "difficulty": "hard"
+  },
+  {
+    "question": "What is the name of the famous Asian martial art that originated in Japan?",
+    "options": ["Kung Fu", "Taekwondo", "Judo"],
+    "correctAns": "Karate",
+    "subjectCode": 103,
+    "difficulty": "hard"
+  },
+  {
+    "question": "What is the name of the famous European composer who wrote the famous Ninth Symphony?",
+    "options": ["Johannes Brahms", "Wolfgang Amadeus Mozart", "Franz Schubert"],
+    "correctAns": "Ludwig van Beethoven",
+    "subjectCode": 107,
+    "difficulty": "hard"
+  },
+  {
+    "question": "What is the name of the famous Asian city-state that is known for its strict laws and cleanliness?",
+    "options": ["Hong Kong", "Tokyo", "Bangkok"],
+    "correctAns": "Singapore",
+    "subjectCode": 108,
+    "difficulty": "hard"
+  },
+  {
+    "question": "What is the name of the famous African-American woman who wrote the novel 'Beloved'?",
+    "options": ["Alice Walker", "Maya Angelou", "Zora Neale Hurston"],
+    "correctAns": "Toni Morrison",
+    "subjectCode": 107,
+    "difficulty": "hard"
+  },
+  {
+    "question": "What is the name of the famous Asian city that was formerly known as 'Saigon'?",
+    "options": ["Bangkok", "Hanoi", "Manila"],
+    "correctAns": "Ho Chi Minh City",
+    "subjectCode": 108,
+    "difficulty": "hard"
+  },
+  {
+    "question": "What is the name of the famous European artist who painted the 'Mona Lisa'?",
+    "options": ["Vincent van Gogh", "Pablo Picasso", "Michelangelo"],
+    "correctAns": "Leonardo da Vinci",
+    "subjectCode": 107,
+    "difficulty": "hard"
+  },
+  {
+    "question": "What is the name of the famous African-American civil rights leader who gave the 'I Have a Dream' speech?",
+    "options": ["Malcolm X", "Thurgood Marshall", "James Baldwin"],
+    "correctAns": "Martin Luther King Jr.",
+    "subjectCode": 107,
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the name of the famous American author who wrote 'The Great Gatsby'?",
+    "options": ["Ernest Hemingway", "John Steinbeck", "William Faulkner"],
+    "correctAns": "F. Scott Fitzgerald",
+    "subjectCode": 107,
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the name of the famous European city that is known for its canals and colorful buildings?",
+    "options": ["Copenhagen", "Brussels", "Munich"],
+    "correctAns": "Amsterdam",
+    "subjectCode": 108,
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the name of the famous African-American singer who is known as the 'Queen of Soul'?",
+    "options": ["Whitney Houston", "Diana Ross", "Tina Turner"],
+    "correctAns": "Aretha Franklin",
+    "subjectCode": 107,
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the name of the famous Asian river that is considered the longest river in the world?",
+    "options": ["The Ganges", "The Yellow River", "The Yangtze"],
+    "correctAns": "The Nile",
+    "subjectCode": 105,
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the name of the famous U.S. document that guarantees certain rights and freedoms to American citizens?",
+    "options": [
+      "The Constitution",
+      "The Declaration of Independence",
+      "The Emancipation Proclamation"
+    ],
+    "correctAns": "The Bill of Rights",
+    "subjectCode": 104,
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the name of the famous European scientist who proposed the theory of relativity?",
+    "options": ["Isaac Newton", "Galileo Galilei", "Stephen Hawking"],
+    "correctAns": "Albert Einstein",
+    "subjectCode": 106,
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the name of the famous Asian country that is known for its spicy food and ancient temples?",
+    "options": ["India", "China", "Japan"],
+    "correctAns": "Thailand",
+    "subjectCode": 106,
+    "difficulty": "medium"
+  },
+  {
+    "question": "Who is the author of the novel 'Pride and Prejudice'?",
+    "options": ["George Eliot", "Charlotte Bronte", "Emily Bronte"],
+    "correctAns": "Jane Austen",
+    "subjectCode": 106,
+    "difficulty": "medium"
+  },
+  {
+    "question": "Which country gifted the Statue of Liberty to the United States?",
+    "options": ["Germany", "Italy", "Spain"],
+    "correctAns": "France",
+    "subjectCode": 103,
+    "difficulty": "easy"
+  },
+  {
+    "question": "Who invented the telephone?",
+    "options": ["Thomas Edison", "Nikola Tesla", "Eli Whitney"],
+    "correctAns": "Alexander Graham Bell",
+    "subjectCode": 107,
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is the smallest country in the world by land area?",
+    "options": ["Monaco", "San Marino", "Nauru"],
+    "correctAns": "Vatican City",
+    "subjectCode": 103,
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the capital city of Australia?",
+    "options": ["Sydney", "Melbourne", "Brisbane"],
+    "correctAns": "Canberra",
+    "subjectCode": 108,
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is the currency of Japan?",
+    "options": ["Dollar", "Euro", "Pound"],
+    "correctAns": "Yen",
+    "subjectCode": 105,
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is the largest country in the world by land area?",
+    "options": ["United States", "China", "India"],
+    "correctAns": "Russia",
+    "subjectCode": 103,
+    "difficulty": "hard"
+  },
+  {
+    "question": "Who was the first man to step on the moon?",
+    "options": ["Buzz Aldrin", "Michael Collins", "Alan Shepard"],
+    "correctAns": "Neil Armstrong",
+    "subjectCode": 107,
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the highest mountain peak in North America?",
+    "options": ["Mount Rainier", "Mount Whitney", "Mount Hood"],
+    "correctAns": "Mount Denali",
+    "subjectCode": 104,
+    "difficulty": "hard"
+  },
+  {
+    "question": "Who is the founder of Microsoft?",
+    "options": ["Steve Jobs", "Jeff Bezos", "Mark Zuckerberg"],
+    "correctAns": "Bill Gates",
+    "subjectCode": 107,
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which of the following is not one of the Great Lakes in North America?",
+    "options": ["Lake Ontario", "Lake Michigan", "Lake Superior"],
+    "correctAns": "Lake Tahoe",
+    "subjectCode": 104,
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the name of the famous painting by Leonardo da Vinci that is displayed at the Louvre Museum in Paris?",
+    "options": ["The Scream", "The Persistence of Memory", "Starry Night"],
+    "correctAns": "Mona Lisa",
+    "subjectCode": 106,
+    "difficulty": "easy"
+  },
+  {
+    "question": "Who was the first female prime minister of the United Kingdom?",
+    "options": ["Theresa May", "Angela Merkel", "Jacinda Ardern"],
+    "correctAns": "Margaret Thatcher",
+    "subjectCode": 109,
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the currency of Brazil?",
+    "options": ["Peso", "Dollar", "Euro"],
+    "correctAns": "Real",
+    "subjectCode": 105,
+    "difficulty": "easy"
+  },
+  {
+    "question": "Who wrote the famous novel 'To Kill a Mockingbird'?",
+    "options": ["Mark Twain", "Ernest Hemingway", "F. Scott Fitzgerald"],
+    "correctAns": "Harper Lee",
+    "subjectCode": 106,
+    "difficulty": "medium"
+  },
+  {
+    "question": "Which planet in our solar system is known as the 'Red Planet'?",
+    "options": ["Jupiter", "Saturn", "Venus"],
+    "correctAns": "Mars",
+    "subjectCode": 102,
+    "difficulty": "easy"
+  },
+  {
+    "question": "Who is the current Prime Minister of Canada?",
+    "options": ["Stephen Harper", "Andrew Scheer", "Jagmeet Singh"],
+    "correctAns": "Justin Trudeau",
+    "subjectCode": 109,
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the name of the fictional detective created by Arthur Conan Doyle?",
+    "options": ["Hercule Poirot", "Miss Marple", "Philip Marlowe"],
+    "correctAns": "Sherlock Holmes",
+    "subjectCode": 106,
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which river is the longest in the world?",
+    "options": ["Amazon", "Yangtze", "Mississippi"],
+    "correctAns": "Nile",
+    "subjectCode": 104,
+    "difficulty": "hard"
+  },
+  {
+    "question": "Which is the largest state by area in the United States?",
+    "options": ["Texas", "California", "Florida"],
+    "correctAns": "Alaska",
+    "subjectCode": 104,
+    "difficulty": "hard"
+  },
+  {
+    "question": "What is the capital city of Australia?",
+    "options": ["Sydney", "Melbourne", "Perth"],
+    "correctAns": "Canberra",
+    "subjectCode": 107,
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which country has the highest population in the world?",
+    "options": ["India", "United States", "Russia"],
+    "correctAns": "China",
+    "subjectCode": 101,
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is the smallest planet in our solar system?",
+    "options": ["Mars", "Jupiter", "Venus"],
+    "correctAns": "Mercury",
+    "subjectCode": 103,
+    "difficulty": "easy"
+  },
+
+  {
+    "question": "What is the chemical symbol for gold?",
+    "options": ["Go", "Ag", "Gd"],
+    "correctAns": "Au",
+    "subjectCode": 108,
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is the name of the Greek goddess of love and beauty?",
+    "options": ["Athena", "Hera", "Demeter"],
+    "correctAns": "Aphrodite",
+    "subjectCode": 102,
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is the only continent that is also a country?",
+    "options": ["North America", "Africa", "Europe"],
+    "correctAns": "Australia",
+    "subjectCode": 107,
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is the name of the highest mountain in Africa?",
+    "options": ["K2", "Mount Everest", "Matterhorn"],
+    "correctAns": "Mount Kilimanjaro",
+    "subjectCode": 105,
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is the name of the famous scientist who developed the theory of relativity?",
+    "options": ["Stephen Hawking", "Isaac Newton", "Nikola Tesla"],
+    "correctAns": "Albert Einstein",
+    "subjectCode": 103,
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the name of the largest mammal in the world?",
+    "options": ["Elephant", "Giraffe", "Hippopotamus"],
+    "correctAns": "Blue Whale",
+    "subjectCode": 106,
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the name of the famous painting by Leonardo da Vinci that is also known as La Gioconda?",
+    "options": ["The Persistence of Memory", "The Scream", "The Last Supper"],
+    "correctAns": "Mona Lisa",
+    "subjectCode": 102,
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the capital city of Italy?",
+    "options": ["Paris", "Madrid", "Athens"],
+    "correctAns": "Rome",
+    "subjectCode": 102,
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which planet is closest to the Sun?",
+    "options": ["Mars", "Venus", "Jupiter"],
+    "correctAns": "Mercury",
+    "subjectCode": 104,
+    "difficulty": "easy"
+  },
+  {
+    "question": "Who painted the famous artwork 'The Last Supper'?",
+    "options": ["Michelangelo", "Raphael", "Vincent van Gogh"],
+    "correctAns": "Leonardo da Vinci",
+    "subjectCode": 101,
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the name of the iconic tower in Paris?",
+    "options": ["Big Ben", "Leaning Tower of Pisa", "Tower Bridge"],
+    "correctAns": "Eiffel Tower",
+    "subjectCode": 103,
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which country won the FIFA World Cup in 2018?",
+    "options": ["Germany", "Argentina", "Brazil"],
+    "correctAns": "France",
+    "subjectCode": 107,
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which famous scientist developed the theory of relativity?",
+    "options": ["Isaac Newton", "Stephen Hawking", "Galileo Galilei"],
+    "correctAns": "Albert Einstein",
+    "subjectCode": 106,
+    "difficulty": "medium"
+  },
+  {
+    "question": "Who wrote the famous novel 'To Kill a Mockingbird'?",
+    "options": ["Ernest Hemingway", "William Faulkner", "F. Scott Fitzgerald"],
+    "correctAns": "Harper Lee",
+    "subjectCode": 109,
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the name of the first man to walk on the moon?",
+    "options": ["Buzz Aldrin", "Yuri Gagarin", "Alan Shepard"],
+    "correctAns": "Neil Armstrong",
+    "subjectCode": 105,
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which country is famous for the landmark called 'Stonehenge'?",
+    "options": ["Italy", "France", "Germany"],
+    "correctAns": "England",
+    "subjectCode": 103,
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the name of the famous park in New York City?",
+    "options": ["Hyde Park", "Stanley Park", "Golden Gate Park"],
+    "correctAns": "Central Park",
+    "subjectCode": 108,
+    "difficulty": "easy"
+  }
+]

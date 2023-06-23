@@ -1,0 +1,16 @@
+
+.navlink {
+  font-size: var(--body-text);
+  margin: 0 2rem;
+  padding: 0.5rem 0.5rem;
+}
+
+.navlink-active {
+  border-bottom: 0.1rem solid var(--dark);
+  font-size: var(--body-text);
+  margin: 0 2rem;
+  padding: 0.5rem 0.5rem;
+}
+.navlink:hover {
+  opacity: 0.7;
+}
