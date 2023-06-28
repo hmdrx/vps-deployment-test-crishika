@@ -1,4 +1,4 @@
-export const tempOtpVerification = (otp: number) => {
+export const tempOtpVerification = (otp: string) => {
   return `
     <div
     class="container"
@@ -11,7 +11,7 @@ export const tempOtpVerification = (otp: number) => {
 </div>
     `;
 };
-export const tempResetPasswordOtp = (otp: number) => {
+export const tempResetPasswordOtp = (otp: string) => {
   return `
     <div
     class="container"

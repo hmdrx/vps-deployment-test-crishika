@@ -3,8 +3,8 @@ import nodemailer from 'nodemailer';
 interface IMailParams {
   to: string;
   subject: string;
-  otp: number;
-  template: (otp: number) => string;
+  otp: string;
+  template: (otp: string) => string;
 }
 
 const emailSettings = {

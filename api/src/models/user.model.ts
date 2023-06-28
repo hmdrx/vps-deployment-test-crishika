@@ -4,8 +4,9 @@ import bcrypt from 'bcrypt';
 // Define an interface for the user document
 export declare interface IUser extends Document {
   name: string;
-  email: string;
   mobile: number;
+  email: string;
+  gender: 'male' | 'female' | 'other';
   degree: string;
   degreeStatus: 'passout' | 'persuing';
   college: string;
@@ -20,8 +21,12 @@ export declare interface IUser extends Document {
 // Define a schema for the user collection
 const userSchema = new mongoose.Schema<IUser>({
   name: { type: String, required: [true, 'Please enter name.'] },
-  email: { type: String, required: [true, 'Please enter email.'] },
-  mobile: Number,
+  mobile: { type: Number, required: [true, 'Please enter mobile.'] },
+  gender: {
+    type: String,
+    enum: ['male', 'female', 'other'],
+  },
+  email: String,
   degree: String,
   degreeStatus: {
     type: String,

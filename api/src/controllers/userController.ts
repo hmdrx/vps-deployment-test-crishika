@@ -37,16 +37,8 @@ export const updateMe = catchAsync(
   async (req: Request, res: Response, _next: NextFunction) => {
     const { _id } = req.user;
 
-    const {
-      role,
-      email,
-      password,
-      otp,
-      otp_valid,
-      verified,
-      active,
-      ...others
-    } = req.body;
+    const { role, password, otp, otp_valid, verified, active, ...others } =
+      req.body;
 
     let updatedUser = await User.findByIdAndUpdate(_id, others, {
       new: true,

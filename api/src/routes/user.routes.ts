@@ -6,6 +6,10 @@ import {
   verification,
   resendOtp,
   restrictTo,
+  appOptRegisterVerification,
+  appRegister,
+  sendAppOTPRegister,
+  appLogin,
 } from '../controllers/authController';
 import {
   getUser,
@@ -24,7 +28,11 @@ import {
 const router = express.Router();
 
 router.route('/register').post(register);
+router.route('/app-register').post(appRegister);
+router.route('/send-app-otp').post(sendAppOTPRegister);
+router.route('/verify-app-otp').post(appOptRegisterVerification);
 router.route('/login').post(login);
+router.route('/app-login').post(appLogin);
 router.route('/verification').post(verification);
 router.route('/resend-otp').post(resendOtp);
 router.route('/password-reset').patch(resetPassword);
