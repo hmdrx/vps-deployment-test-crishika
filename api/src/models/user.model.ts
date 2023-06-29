@@ -8,7 +8,7 @@ export declare interface IUser extends Document {
   email: string;
   gender: 'male' | 'female' | 'other';
   degree: string;
-  degreeStatus: 'passout' | 'persuing';
+  degreeStatus: string;
   college: string;
   role: 'user' | 'admin' | 'tutor';
   password: string;

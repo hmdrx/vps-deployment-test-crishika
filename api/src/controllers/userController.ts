@@ -4,8 +4,10 @@ import catchAsync from '../utils/catchAsync';
 import bcrypt from 'bcrypt';
 import generateOTP from '../services/otp';
 import sendMail from '../services/mail';
+import jwt from 'jsonwebtoken';
 import { tempResetPasswordOtp } from '../services/mailTemplates';
 import { NextFunction, Request, Response } from 'express';
+import axios from 'axios';
 
 export const myProfile = catchAsync(
   async (req: Request, res: Response, _next: NextFunction) => {
@@ -78,6 +80,54 @@ export const updatePassword = catchAsync(
   }
 );
 
+export const resetAppPasswordSendOtp = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { mobile } = req.body;
+
+    const user = await User.findOne({ mobile: +mobile });
+    if (!user)
+      return next(
+        new AppError(
+          'there is no user with this mobile plz enter correct mobile number',
+          401
+        )
+      );
+
+    const generatedOtp = generateOTP(4);
+
+    const resetPasswordToken = jwt.sign(
+      { otp: generatedOtp },
+      process.env.JWT_SECRETE,
+      {
+        expiresIn: '10m',
+      }
+    );
+
+    try {
+      await axios.post(
+        'https://www.fast2sms.com/dev/bulkV2',
+        {
+          variables_values: generatedOtp,
+          route: 'otp',
+          numbers: req.body.mobile,
+        },
+        {
+          headers: {
+            Authorization: process.env.FAST_TO_SMS_API_KEY,
+          },
+        }
+      );
+    } catch (error) {
+      console.log(error);
+      return next(new AppError('Unable to send sms', 400));
+    }
+
+    res.status(200).json({
+      message: 'OTP sent successfully.',
+      token: resetPasswordToken,
+    });
+  }
+);
 export const resetPasswordSendOtp = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const { email } = req.body;
@@ -110,6 +160,35 @@ export const resetPasswordSendOtp = catchAsync(
   }
 );
 
+export const resetAppPasswordOtpValidation = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { mobile, otp } = req.body;
+
+    let user = await User.findOne({ mobile: +mobile });
+    if (!user) return next(new AppError('Invalid access. user not found', 401));
+
+    if (
+      !req.headers.authorization ||
+      !req.headers.authorization.startsWith('Bearer')
+    ) {
+      return next(new AppError('bad request', 400));
+    }
+
+    const resetToken = req.headers.authorization.split(' ')[1];
+
+    const decoded = jwt.verify(resetToken, process.env.JWT_SECRETE) as {
+      otp: string;
+    };
+
+    if (otp !== decoded.otp) {
+      return next(new AppError('Invalid otp', 400));
+    }
+
+    res.status(200).json({
+      message: 'OTP verified!',
+    });
+  }
+);
 export const resetPasswordOtpValidation = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const { email, otp } = req.body;
@@ -126,6 +205,25 @@ export const resetPasswordOtpValidation = catchAsync(
     res.status(200).json({
       status: 'success',
       message: 'OTP verified!',
+    });
+  }
+);
+export const resetAppPassword = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { mobile, newPassword, confirmPassword } = req.body;
+
+    if (newPassword !== confirmPassword)
+      return next(new AppError(`Password doesn't match`, 401));
+
+    let user = await User.findOne({ mobile: +mobile });
+    if (!user) return next(new AppError('Invalid input. user not found', 401));
+
+    user.password = newPassword;
+
+    await user.save();
+
+    res.status(200).json({
+      message: 'Password reset successful!',
     });
   }
 );

@@ -99,7 +99,7 @@ export const sendAppOTPRegister = catchAsync(
       { mobile: req.body.mobile, otp: generatedOtp, name: req.body.name },
       process.env.JWT_SECRETE,
       {
-        expiresIn: 10000,
+        expiresIn: '10m',
       }
     );
 

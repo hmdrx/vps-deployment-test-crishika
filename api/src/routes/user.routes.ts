@@ -24,6 +24,9 @@ import {
   myProfile,
   resetPasswordSendOtp,
   resetPasswordOtpValidation,
+  resetAppPassword,
+  resetAppPasswordSendOtp,
+  resetAppPasswordOtpValidation,
 } from '../controllers/userController';
 const router = express.Router();
 
@@ -35,8 +38,13 @@ router.route('/login').post(login);
 router.route('/app-login').post(appLogin);
 router.route('/verification').post(verification);
 router.route('/resend-otp').post(resendOtp);
+router.route('/password-reset-app').patch(resetAppPassword);
 router.route('/password-reset').patch(resetPassword);
+router.route('/password-reset-app-send-otp').post(resetAppPasswordSendOtp);
 router.route('/password-reset-send-otp').post(resetPasswordSendOtp);
+router
+  .route('/password-reset-app-otp-validation')
+  .post(resetAppPasswordOtpValidation);
 router.route('/password-reset-otp-validation').post(resetPasswordOtpValidation);
 router.use(protect);
 router.route('/my-profile').get(myProfile);
