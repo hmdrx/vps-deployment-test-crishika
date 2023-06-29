@@ -34,7 +34,7 @@ export const getSubject = catchAsync(
 );
 export const getAllSubject = catchAsync(
   async (_req: Request, res: Response, _next: NextFunction) => {
-    const subjects = await Subject.find().select('subject code -_id');
+    const subjects = await Subject.find().select('subject code image -_id');
 
     res.status(200).json({
       length: subjects.length,

@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import QuestionAttempt from '../../models/attempt/questionAttempt.model';
 import ReadAttempt from '../../models/attempt/readAttempt.model';
+import Question from '../../models/question.model';
 import catchAsync from '../../utils/catchAsync';
 
 const months = [
@@ -245,8 +246,50 @@ export const getLastSevenDaysQuestionAttemptProgress = catchAsync(
 export const getReadAttemptReport = catchAsync(
   async (req: Request, res: Response, _next: NextFunction) => {
     const report = await getReadAttemptReportFunc(req.user._id);
+    const questionCount = await Question.countDocuments();
+    const questionCountSubject = await Question.aggregate([
+      {
+        $group: {
+          _id: '$subjectCode',
+          questionCount: { $sum: 1 },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          subjectCode: '$_id',
+          questionCount: 1,
+        },
+      },
+    ]);
+    const mergedData = {
+      report: [
+        {
+          totalQuestionCount: questionCount,
+          totalReadCount: report[0].totalReadCount,
+          totalImportantReadCount: report[0].totalImportantReadCount,
+          readSubject: report[0].readSubject.map(
+            (subject: {
+              subjectCode: any;
+              readCount: any;
+              importantReadCount: any;
+            }) => ({
+              subjectCode: subject.subjectCode,
+              readCount: subject.readCount,
+              importantReadCount: subject.importantReadCount,
+              questionCount: questionCountSubject.find(
+                count => count.subjectCode === subject.subjectCode
+              ).questionCount,
+            })
+          ),
+        },
+      ],
+    };
     res.status(200).json({
-      report,
+      // questionCount,
+      // questionCountSubject,
+      // report,
+      ...mergedData,
     });
   }
 );
@@ -282,8 +325,49 @@ export const getReadReportAndProgress = catchAsync(
     const pipeline = piplineFunc(req.user._id);
     const readResults = await ReadAttempt.aggregate(pipeline);
     const data = getWeeklyProgress(readResults);
+
+    const questionCount = await Question.countDocuments();
+    const questionCountSubject = await Question.aggregate([
+      {
+        $group: {
+          _id: '$subjectCode',
+          questionCount: { $sum: 1 },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          subjectCode: '$_id',
+          questionCount: 1,
+        },
+      },
+    ]);
+    const mergedData = {
+      report: [
+        {
+          totalQuestionCount: questionCount,
+          totalReadCount: report[0].totalReadCount,
+          totalImportantReadCount: report[0].totalImportantReadCount,
+          readSubject: report[0].readSubject.map(
+            (subject: {
+              subjectCode: any;
+              readCount: any;
+              importantReadCount: any;
+            }) => ({
+              subjectCode: subject.subjectCode,
+              readCount: subject.readCount,
+              importantReadCount: subject.importantReadCount,
+              questionCount: questionCountSubject.find(
+                count => count.subjectCode === subject.subjectCode
+              ).questionCount,
+            })
+          ),
+        },
+      ],
+    };
+
     res.status(200).json({
-      ...report[0],
+      ...mergedData.report[0],
       readWeeklyProgress: data,
     });
   }
@@ -303,18 +387,50 @@ export const getAllReportAtOnce = catchAsync(
     const readResults = await ReadAttempt.aggregate(readPipeline);
     const readData = getWeeklyProgress(readResults);
 
+    const questionCount = await Question.countDocuments();
+    const questionCountSubject = await Question.aggregate([
+      {
+        $group: {
+          _id: '$subjectCode',
+          questionCount: { $sum: 1 },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          subjectCode: '$_id',
+          questionCount: 1,
+        },
+      },
+    ]);
+    const mergedData = {
+      readReport: [
+        {
+          totalQuestionCount: questionCount,
+          totalReadCount: readReport[0].totalReadCount,
+          totalImportantReadCount: readReport[0].totalImportantReadCount,
+          readSubject: readReport[0].readSubject.map(
+            (subject: {
+              subjectCode: any;
+              readCount: any;
+              importantReadCount: any;
+            }) => ({
+              subjectCode: subject.subjectCode,
+              readCount: subject.readCount,
+              importantReadCount: subject.importantReadCount,
+              questionCount: questionCountSubject.find(
+                count => count.subjectCode === subject.subjectCode
+              ).questionCount,
+            })
+          ),
+        },
+      ],
+    };
+
     res.status(200).json({
-      // question: {
-      //   report: questionReport[0],
-      //   progress: questionData,
-      // },
-      // read: {
-      //   report: readReport[0],
-      //   progress: readData,
-      // },
       ...questionReport[0],
       practiceWeeklyProgress: questionData,
-      ...readReport[0],
+      ...mergedData.readReport[0],
       readWeeklyProgress: readData,
     });
   }
