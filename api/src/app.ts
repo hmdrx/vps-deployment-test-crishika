@@ -2,6 +2,7 @@
 import morgan from 'morgan';
 import express, { Application } from 'express';
 import cors from 'cors';
+import compression from 'compression';
 
 // module import
 import globalErrorHandler from './controllers/errorController';
@@ -18,6 +19,7 @@ const app: Application = express();
 
 // middleware
 app.use(cors());
+app.use(compression());
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('short'));

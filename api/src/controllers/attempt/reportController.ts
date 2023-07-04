@@ -266,9 +266,9 @@ export const getReadAttemptReport = catchAsync(
       report: [
         {
           totalQuestionCount: questionCount,
-          totalReadCount: report[0].totalReadCount,
-          totalImportantReadCount: report[0].totalImportantReadCount,
-          readSubject: report[0].readSubject.map(
+          totalReadCount: report[0]?.totalReadCount,
+          totalImportantReadCount: report[0]?.totalImportantReadCount,
+          readSubject: report[0]?.readSubject.map(
             (subject: {
               subjectCode: any;
               readCount: any;
@@ -407,9 +407,9 @@ export const getAllReportAtOnce = catchAsync(
       readReport: [
         {
           totalQuestionCount: questionCount,
-          totalReadCount: readReport[0].totalReadCount,
-          totalImportantReadCount: readReport[0].totalImportantReadCount,
-          readSubject: readReport[0].readSubject.map(
+          totalReadCount: readReport[0]?.totalReadCount,
+          totalImportantReadCount: readReport[0]?.totalImportantReadCount,
+          readSubject: readReport[0]?.readSubject.map(
             (subject: {
               subjectCode: any;
               readCount: any;
