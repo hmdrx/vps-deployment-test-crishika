@@ -66,5 +66,5 @@ userSchema.pre('save', async function () {
 });
 
 // Define a model for the user collection
-const User = mongoose.model<IUser>('User', userSchema);
-export default User;
+const UserModel = mongoose.model<IUser>('User', userSchema);
+export default UserModel;

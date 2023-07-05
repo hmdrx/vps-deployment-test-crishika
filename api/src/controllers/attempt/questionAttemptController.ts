@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import mongoose from 'mongoose';
-import QuestionAttempt, {
+import QuestionAttemptModel, {
   IQuestionAttempt,
 } from '../../models/attempt/questionAttempt.model';
 import AppError from '../../utils/AppError';
@@ -12,7 +12,10 @@ export const createQuestionAttempt = catchAsync(
     const questions = req.body.questionAttempted.map(
       (question: IQuestionAttempt) => {
         // Create a new document from the read object
-        const doc = new QuestionAttempt({ ...question, user: req.user._id });
+        const doc = new QuestionAttemptModel({
+          ...question,
+          user: req.user._id,
+        });
         // Validate the document and get the error object
         const error = doc.validateSync();
         // If there is no error, return the updateOne operation
@@ -50,7 +53,7 @@ export const createQuestionAttempt = catchAsync(
     const validQuestionAttempt = questions.filter(
       (read: any | null) => read !== null
     );
-    const alldata = await QuestionAttempt.bulkWrite(validQuestionAttempt);
+    const alldata = await QuestionAttemptModel.bulkWrite(validQuestionAttempt);
 
     res.status(201).json({
       alldata,
@@ -60,7 +63,7 @@ export const createQuestionAttempt = catchAsync(
 
 export const getAllQuestionAttempt = catchAsync(
   async (req: Request, res: Response, _next: NextFunction) => {
-    const allQuestionAttempt = await QuestionAttempt.find({
+    const allQuestionAttempt = await QuestionAttemptModel.find({
       user: req.user._id,
     });
 
@@ -72,7 +75,7 @@ export const getAllQuestionAttempt = catchAsync(
 );
 export const deleteAllQuestionAttempt = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const allQuestionAttempt = await QuestionAttempt.find({
+    const allQuestionAttempt = await QuestionAttemptModel.find({
       user: req.user._id,
     });
     if (allQuestionAttempt.length === 0) {
@@ -80,7 +83,7 @@ export const deleteAllQuestionAttempt = catchAsync(
         new AppError('No documents found to delete or already deleted', 404)
       );
     }
-    await QuestionAttempt.deleteMany({ user: req.user._id });
+    await QuestionAttemptModel.deleteMany({ user: req.user._id });
 
     res.status(204).end();
   }
@@ -89,7 +92,7 @@ export const deleteAllQuestionAttempt = catchAsync(
 //GET WRONG/SKIPPED QUESTION ATTEMPT TO PRACTICE
 export const getIncorrectQuestionAttempt = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const read = await QuestionAttempt.find({
+    const read = await QuestionAttemptModel.find({
       user: req.user._id,
     });
     if (!read) {
@@ -105,7 +108,7 @@ export const getIncorrectQuestionAttempt = catchAsync(
       );
     }
 
-    const questions = await QuestionAttempt.aggregate()
+    const questions = await QuestionAttemptModel.aggregate()
       .lookup({
         from: 'questions',
         localField: 'question',

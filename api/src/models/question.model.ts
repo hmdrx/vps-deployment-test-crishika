@@ -35,5 +35,5 @@ const questionSchema = new mongoose.Schema<IQuestion>({
 });
 
 // Define a model for the question collection
-const Question = mongoose.model<IQuestion>('Question', questionSchema);
-export default Question;
+const QuestionModel = mongoose.model<IQuestion>('Question', questionSchema);
+export default QuestionModel;

@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
-import QuestionAttempt from '../../models/attempt/questionAttempt.model';
-import ReadAttempt from '../../models/attempt/readAttempt.model';
-import Question from '../../models/question.model';
+import QuestionAttemptModel from '../../models/attempt/questionAttempt.model';
+import ReadAttemptModel from '../../models/attempt/readAttempt.model';
+import QuestionModel from '../../models/question.model';
 import catchAsync from '../../utils/catchAsync';
 
 const months = [
@@ -102,7 +102,7 @@ const getWeeklyProgress = <
 };
 
 const getQuestionAttemptReportFunc = (userId: string) => {
-  const data = QuestionAttempt.aggregate()
+  const data = QuestionAttemptModel.aggregate()
     .match({ user: userId })
     .lookup({
       from: 'questions',
@@ -178,7 +178,7 @@ const getQuestionAttemptReportFunc = (userId: string) => {
 };
 
 const getReadAttemptReportFunc = (userId: string) => {
-  const data = ReadAttempt.aggregate()
+  const data = ReadAttemptModel.aggregate()
     .match({
       user: userId,
     })
@@ -234,7 +234,7 @@ export const getQuestionAttemptReport = catchAsync(
 export const getLastSevenDaysQuestionAttemptProgress = catchAsync(
   async (req: Request, res: Response, _next: NextFunction) => {
     const pipeline = piplineFunc(req.user._id);
-    const questionResults = await QuestionAttempt.aggregate(pipeline);
+    const questionResults = await QuestionAttemptModel.aggregate(pipeline);
     const data = getWeeklyProgress(questionResults);
     res.status(200).json({
       data,
@@ -246,8 +246,8 @@ export const getLastSevenDaysQuestionAttemptProgress = catchAsync(
 export const getReadAttemptReport = catchAsync(
   async (req: Request, res: Response, _next: NextFunction) => {
     const report = await getReadAttemptReportFunc(req.user._id);
-    const questionCount = await Question.countDocuments();
-    const questionCountSubject = await Question.aggregate([
+    const questionCount = await QuestionModel.countDocuments();
+    const questionCountSubject = await QuestionModel.aggregate([
       {
         $group: {
           _id: '$subjectCode',
@@ -297,7 +297,7 @@ export const getReadAttemptReport = catchAsync(
 export const getLastSevenDaysReadAttemptProgress = catchAsync(
   async (req: Request, res: Response, _next: NextFunction) => {
     const pipeline = piplineFunc(req.user._id);
-    const readResults = await ReadAttempt.aggregate(pipeline);
+    const readResults = await ReadAttemptModel.aggregate(pipeline);
     const data = getWeeklyProgress(readResults);
     res.status(200).json({
       data,
@@ -309,7 +309,7 @@ export const getLastSevenDaysReadAttemptProgress = catchAsync(
 export const getQuestionAttemptReportAndProgress = catchAsync(
   async (req: Request, res: Response, _next: NextFunction) => {
     const pipeline = piplineFunc(req.user._id);
-    const questionResults = await QuestionAttempt.aggregate(pipeline);
+    const questionResults = await QuestionAttemptModel.aggregate(pipeline);
     const data = getWeeklyProgress(questionResults);
     const report = await getQuestionAttemptReportFunc(req.user._id);
     res.status(200).json({
@@ -323,11 +323,11 @@ export const getReadReportAndProgress = catchAsync(
   async (req: Request, res: Response, _next: NextFunction) => {
     const report = await getReadAttemptReportFunc(req.user._id);
     const pipeline = piplineFunc(req.user._id);
-    const readResults = await ReadAttempt.aggregate(pipeline);
+    const readResults = await ReadAttemptModel.aggregate(pipeline);
     const data = getWeeklyProgress(readResults);
 
-    const questionCount = await Question.countDocuments();
-    const questionCountSubject = await Question.aggregate([
+    const questionCount = await QuestionModel.countDocuments();
+    const questionCountSubject = await QuestionModel.aggregate([
       {
         $group: {
           _id: '$subjectCode',
@@ -377,18 +377,20 @@ export const getAllReportAtOnce = catchAsync(
   async (req: Request, res: Response, _next: NextFunction) => {
     //question
     const questionPipeline = piplineFunc(req.user._id);
-    const questionResults = await QuestionAttempt.aggregate(questionPipeline);
+    const questionResults = await QuestionAttemptModel.aggregate(
+      questionPipeline
+    );
     const questionData = getWeeklyProgress(questionResults);
     const questionReport = await getQuestionAttemptReportFunc(req.user._id);
 
     // Read
     const readReport = await getReadAttemptReportFunc(req.user._id);
     const readPipeline = piplineFunc(req.user._id);
-    const readResults = await ReadAttempt.aggregate(readPipeline);
+    const readResults = await ReadAttemptModel.aggregate(readPipeline);
     const readData = getWeeklyProgress(readResults);
 
-    const questionCount = await Question.countDocuments();
-    const questionCountSubject = await Question.aggregate([
+    const questionCount = await QuestionModel.countDocuments();
+    const questionCountSubject = await QuestionModel.aggregate([
       {
         $group: {
           _id: '$subjectCode',

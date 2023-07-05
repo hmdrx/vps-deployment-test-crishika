@@ -27,8 +27,8 @@ const readAttemptSchema = new mongoose.Schema<IReadAttempt>(
   }
 );
 
-const ReadAttempt = mongoose.model<IReadAttempt>(
+const ReadAttemptModel = mongoose.model<IReadAttempt>(
   'ReadAttempt',
   readAttemptSchema
 );
-export default ReadAttempt;
+export default ReadAttemptModel;

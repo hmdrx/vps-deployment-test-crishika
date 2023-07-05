@@ -1,4 +1,4 @@
-import User, { IUser } from '../models/user.model';
+import UserModel, { IUser } from '../models/user.model';
 import AppError from '../utils/AppError';
 import catchAsync from '../utils/catchAsync';
 import jwt from 'jsonwebtoken';
@@ -14,7 +14,7 @@ export const register = catchAsync(
     if (req.body.password !== req.body.confirmPassword)
       return next(new AppError(`Password doesn't match`, 401));
 
-    const exitsUser = await User.findOne({ email: req.body.email });
+    const exitsUser = await UserModel.findOne({ email: req.body.email });
 
     if (exitsUser) {
       return next(new AppError('already registered with us plz login', 400));
@@ -28,7 +28,7 @@ export const register = catchAsync(
       otp: generatedOtp,
       template: tempOtpVerification,
     });
-    const user = await User.create({ ...req.body, otp: generatedOtp });
+    const user = await UserModel.create({ ...req.body, otp: generatedOtp });
     const { role, password, otp, ...others } = user;
 
     res.status(200).json({
@@ -59,14 +59,14 @@ export const appRegister = catchAsync(
       name: string;
     };
 
-    const exitsUser = await User.findOne({ mobile: +decoded.mobile });
+    const exitsUser = await UserModel.findOne({ mobile: +decoded.mobile });
 
     if (exitsUser) {
       return next(new AppError('already registered with us plz login', 400));
     }
 
     const { name, mobile } = decoded;
-    const user = await User.create({
+    const user = await UserModel.create({
       name,
       mobile: +mobile,
       password: req.body.password,
@@ -87,7 +87,7 @@ export const appRegister = catchAsync(
 );
 export const sendAppOTPRegister = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const exitsUser = await User.findOne({ mobile: req.body.mobile });
+    const exitsUser = await UserModel.findOne({ mobile: req.body.mobile });
 
     if (exitsUser) {
       return next(new AppError('already registered with us plz login', 400));
@@ -161,7 +161,7 @@ export const appOptRegisterVerification = catchAsync(
 export const verification = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     let user: IUser;
-    user = (await User.findOne({ email: req.body.email })) as IUser;
+    user = (await UserModel.findOne({ email: req.body.email })) as IUser;
     if (!user)
       return next(new AppError('No email exists for otp verification', 401));
 
@@ -171,7 +171,7 @@ export const verification = catchAsync(
         // user.otp = undefined;
         // user.otp_valid = undefined;
         // user = await user.save({ validateBeforeSave: false });
-        user = (await User.findByIdAndUpdate(
+        user = (await UserModel.findByIdAndUpdate(
           user._id,
           {
             verified: true,
@@ -224,7 +224,7 @@ export const verification = catchAsync(
           },
         });
       } else {
-        await User.findOneAndDelete({ email: req.body.email });
+        await UserModel.findOneAndDelete({ email: req.body.email });
         return next(
           new AppError('You exceed the limit pls try again later!', 401)
         );
@@ -236,7 +236,7 @@ export const verification = catchAsync(
 export const resendOtp = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     let user;
-    user = await User.findOne({ email: req.body.email });
+    user = await UserModel.findOne({ email: req.body.email });
 
     if (!user)
       return next(
@@ -253,7 +253,10 @@ export const resendOtp = catchAsync(
       otp: generatedOtp,
       template: tempOtpVerification,
     });
-    await User.findOneAndUpdate({ email: user.email }, { otp: generatedOtp });
+    await UserModel.findOneAndUpdate(
+      { email: user.email },
+      { otp: generatedOtp }
+    );
 
     res.status(200).json({
       status: 'success',
@@ -268,7 +271,7 @@ export const login = catchAsync(
     if (!mobile || !password)
       return next(new AppError('pls provide mobile & password', 400));
 
-    const user = await User.findOne({ mobile });
+    const user = await UserModel.findOne({ mobile });
 
     if (!user) {
       return next(new AppError(`seems you didn't register yet`, 400));
@@ -300,7 +303,7 @@ export const appLogin = catchAsync(
     if (!mobile || !password)
       return next(new AppError('pls provide mobile & password', 400));
 
-    const user = await User.findOne({ mobile });
+    const user = await UserModel.findOne({ mobile });
 
     if (!user) {
       return next(new AppError(`seems you didn't register yet`, 400));
@@ -340,7 +343,7 @@ export const protect = catchAsync(
     const decoded = jwt.verify(token, process.env.JWT_SECRETE!) as {
       id: string;
     };
-    const currentUser = await User.findById(decoded.id);
+    const currentUser = await UserModel.findById(decoded.id);
     if (!currentUser)
       return next(
         new AppError('user belonging to this token does no longer exists', 401)

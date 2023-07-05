@@ -16,7 +16,7 @@ const card = [
 ];
 
 const cards = card.map(el => (
-  <Grid item xs={12} md={4} sx={{ p: 2 }} key={el}>
+  <Grid item xs={12} md={4} sx={{ p: 2 }} key={el + Math.random()}>
     <Card
       sx={{
         p: 4,

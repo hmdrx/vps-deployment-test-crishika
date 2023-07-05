@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import mongoose from 'mongoose';
-import QuestionAttempt from '../../models/attempt/questionAttempt.model';
-import ReadAttempt, {
+import QuestionAttemptModel from '../../models/attempt/questionAttempt.model';
+import ReadAttemptModel, {
   IReadAttempt,
 } from '../../models/attempt/readAttempt.model';
 import AppError from '../../utils/AppError';
@@ -12,7 +12,7 @@ export const createReadAttempt = catchAsync(
   async (req: Request, res: Response, _next: NextFunction) => {
     const reads = req.body.readAttempted.map((read: IReadAttempt) => {
       // Create a new document from the read object
-      const doc = new ReadAttempt({ ...read, user: req.user._id });
+      const doc = new ReadAttemptModel({ ...read, user: req.user._id });
       // Validate the document and get the error object
       const error = doc.validateSync();
       // If there is no error, return the updateOne operation
@@ -35,7 +35,7 @@ export const createReadAttempt = catchAsync(
     // Filter out any null values from the reads array
     const validReads = reads.filter((read: Object | null) => read !== null);
     console.log('validReads', validReads);
-    const alldata = await ReadAttempt.bulkWrite(validReads);
+    const alldata = await ReadAttemptModel.bulkWrite(validReads);
 
     res.status(201).json({
       alldata,
@@ -45,7 +45,7 @@ export const createReadAttempt = catchAsync(
 
 export const getAllReadAttempt = catchAsync(
   async (req: Request, res: Response, _next: NextFunction) => {
-    const allReadAttempt = await ReadAttempt.find({
+    const allReadAttempt = await ReadAttemptModel.find({
       user: req.user._id,
     });
 
@@ -58,7 +58,7 @@ export const getAllReadAttempt = catchAsync(
 
 export const deleteAllReadAttempt = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const allReadAttempt = await ReadAttempt.find({
+    const allReadAttempt = await ReadAttemptModel.find({
       user: req.user._id,
     });
     if (allReadAttempt.length === 0) {
@@ -66,7 +66,7 @@ export const deleteAllReadAttempt = catchAsync(
         new AppError('No documents found to delete or already deleted', 404)
       );
     }
-    await ReadAttempt.deleteMany({ user: req.user._id });
+    await ReadAttemptModel.deleteMany({ user: req.user._id });
 
     res.status(204).end();
   }
@@ -75,7 +75,7 @@ export const deleteAllReadAttempt = catchAsync(
 //GET INCORRECT/SKIPPED QUESTION ATTEMPT TO READ
 export const getIncorrectOrSkippedQuestionAttempt = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const attempt = await QuestionAttempt.find({ user: req.user._id });
+    const attempt = await QuestionAttemptModel.find({ user: req.user._id });
     if (!attempt) {
       return next(new AppError('there is no attempt to read again', 404));
     }
@@ -86,7 +86,7 @@ export const getIncorrectOrSkippedQuestionAttempt = catchAsync(
       );
     }
 
-    const questions = await QuestionAttempt.aggregate()
+    const questions = await QuestionAttemptModel.aggregate()
       .lookup({
         from: 'questions',
         localField: 'question',

@@ -1,12 +1,12 @@
 import { NextFunction, Request, Response } from 'express';
 
-import Subject from '../models/subject.model';
+import SubjectModel from '../models/subject.model';
 import catchAsync from '../utils/catchAsync';
 import AppError from '../utils/AppError';
 
 export const createSubject = catchAsync(
   async (req: Request, res: Response, _next: NextFunction) => {
-    const newCat = await Subject.create(req.body);
+    const newCat = await SubjectModel.create(req.body);
 
     res.status(200).json({
       status: 'success',
@@ -18,7 +18,7 @@ export const createSubject = catchAsync(
 );
 export const getSubject = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const subject = await Subject.findById(req.params.id);
+    const subject = await SubjectModel.findById(req.params.id);
 
     if (!subject) {
       return next(new AppError('there is no subject with this id', 404));
@@ -34,7 +34,9 @@ export const getSubject = catchAsync(
 );
 export const getAllSubject = catchAsync(
   async (_req: Request, res: Response, _next: NextFunction) => {
-    const subjects = await Subject.find().select('subject code image -_id');
+    const subjects = await SubjectModel.find().select(
+      'subject code image -_id'
+    );
 
     res.status(200).json({
       length: subjects.length,
@@ -44,7 +46,7 @@ export const getAllSubject = catchAsync(
 );
 export const updateSubject = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    let subject = await Subject.findById(req.params.id);
+    let subject = await SubjectModel.findById(req.params.id);
 
     if (!subject) {
       return next(new AppError('no such subject found to update', 404));
@@ -66,26 +68,26 @@ export const updateSubject = catchAsync(
 );
 export const deleteSubject = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const subject = await Subject.findById(req.params.id);
+    const subject = await SubjectModel.findById(req.params.id);
 
     if (!subject) {
       return next(new AppError('there is no to delete', 404));
     }
 
-    await Subject.findByIdAndDelete(req.params.id);
+    await SubjectModel.findByIdAndDelete(req.params.id);
 
     res.status(204).end();
   }
 );
 export const deleteAllSubject = catchAsync(
   async (_req: Request, res: Response, next: NextFunction) => {
-    const subjects = await Subject.find();
+    const subjects = await SubjectModel.find();
 
     if (!subjects) {
       return next(new AppError('there is no categories to delete', 404));
     }
 
-    await Subject.deleteMany();
+    await SubjectModel.deleteMany();
 
     res.status(204).end();
   }

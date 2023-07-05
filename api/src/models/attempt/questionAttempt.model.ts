@@ -28,9 +28,9 @@ const questionAttemptSchema = new mongoose.Schema<IQuestionAttempt>(
 );
 
 // Define a model for the read collection
-const QuestionAttempt = mongoose.model<IQuestionAttempt>(
+const QuestionAttemptModel = mongoose.model<IQuestionAttempt>(
   'QuestionAttempt',
   questionAttemptSchema
 );
 
-export default QuestionAttempt;
+export default QuestionAttemptModel;
