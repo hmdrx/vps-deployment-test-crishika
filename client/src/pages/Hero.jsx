@@ -1,6 +1,5 @@
 import hero from '../assets/svg/hero.svg';
 import { Box, Button, Container, Stack, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
 import { colors } from '../constants/colors';
 import { Shop } from '@mui/icons-material';
 
@@ -28,16 +27,16 @@ const Hero = () => {
                 <strong>Question database</strong>
               </Typography>
 
-              <Link to="#">
-                <Button
-                  variant="contained"
-                  startIcon={<Shop />}
-                  color="secondary"
-                  sx={{ my: { md: 14, xs: 6 } }}
-                >
-                  Download App
-                </Button>
-              </Link>
+              <Button
+                variant="contained"
+                startIcon={<Shop />}
+                color="secondary"
+                sx={{ my: { md: 14, xs: 6 } }}
+                href={process.env.REACT_APP_DOWNLOAD_APP_URL}
+                target="_blank"
+              >
+                Download App
+              </Button>
             </Box>
             <Box
               sx={{ maxWidth: { xs: '30rem', md: '50rem' } }}

@@ -25,6 +25,8 @@ const SectionFour = () => {
           startIcon={<Shop />}
           color="secondary"
           sx={{ mt: 4 }}
+          href={process.env.REACT_APP_DOWNLOAD_APP_URL}
+          target="_blank"
         >
           Download App
         </Button>

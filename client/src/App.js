@@ -1,5 +1,6 @@
 import { createTheme, ThemeProvider } from '@mui/material';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
 import Donate from './pages/Donate';
 
 // Landing page imports

@@ -1,7 +1,6 @@
 import {
   Alert,
   Box,
-  Button,
   Container,
   Divider,
   Stack,
@@ -12,6 +11,7 @@ import React from 'react';
 import axios from 'axios';
 import { useState } from 'react';
 import Snackbar from '@mui/material/Snackbar';
+import LoadingButton from '@mui/lab/LoadingButton';
 import {
   ValidateEmail,
   ValidateMessage,
@@ -25,6 +25,7 @@ const Contact = () => {
     email: false,
     message: false,
   });
+  const [loading, setLoading] = useState(false);
 
   const [snackbar, setSnackbar] = useState({
     open: false,
@@ -49,9 +50,10 @@ const Contact = () => {
 
     if (isNameValid && isEmailValid && isMessageValid) {
       (async () => {
+        setLoading(true);
         try {
           const res = await axios.post(
-            'http://localhost:6767/api/v1/inquiry/guest',
+            `${process.env.REACT_APP_BASE_URL}/api/v1/inquiry/guest`,
             {
               name: inputs.name.trim(),
               email: inputs.email.trim(),
@@ -59,6 +61,7 @@ const Contact = () => {
             }
           );
           if (res.status === 201) {
+            setInputs({ name: '', email: '', message: '' });
             handleClick({
               vertical: 'bottom',
               horizontal: 'center',
@@ -67,12 +70,15 @@ const Contact = () => {
             });
           }
         } catch (error) {
+          console.log(error.message);
           handleClick({
             vertical: 'bottom',
             horizontal: 'center',
             severity: 'error',
-            message: error.response.data,
+            message: error.message,
           });
+        } finally {
+          setLoading(false);
         }
       })();
     } else {
@@ -182,14 +188,15 @@ const Contact = () => {
           />
           {/* </Box> */}
 
-          <Button
+          <LoadingButton
             sx={{ alignSelf: 'flex-start' }}
-            size="medium"
+            loading={loading}
+            loadingIndicator="Sending..."
             variant="contained"
             onClick={submitHandler}
           >
             Submit
-          </Button>
+          </LoadingButton>
         </Stack>
       </Box>
     </Container>
