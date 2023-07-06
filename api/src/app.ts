@@ -40,11 +40,12 @@ app.use(express.json({ limit: '10kb' }));
 app.use(express.static(path.join(__dirname, '..', '..', 'client', 'build')));
 
 //Routes
-app.get('/', (_req, res, _next) => {
-  res.sendFile(
-    path.join(__dirname, '..', '..', 'client', 'build', 'index.html')
-  );
-});
+// app.get('/', (_req, res, _next) => {
+//   res.sendFile(
+//     path.join(__dirname, '..', '..', 'client', 'build', 'index.html')
+//   );
+
+// });
 app.use('/api/v1/question', questionsRouter);
 app.use('/api/v1/user', userRouter);
 app.use('/api/v1/subject', subjectRouter);
@@ -53,9 +54,12 @@ app.use('/api/v1/question-attempt', questionAttemptRouter);
 app.use('/api/v1/report', reportRouter);
 app.use('/api/v1/inquiry', inquiryRouter);
 app.use('*', (_req, res, _next) => {
-  res.status(404).json({
-    message: 'Page Not Found!',
-  });
+  // res.status(404).json({
+  //   message: 'Page Not Found!',
+  // });
+  res.sendFile(
+    path.join(__dirname, '..', '..', 'client', 'build', 'index.html')
+  );
 });
 
 app.use(globalErrorHandler);
