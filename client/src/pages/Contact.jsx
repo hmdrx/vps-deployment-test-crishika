@@ -138,6 +138,7 @@ const Contact = () => {
               focused={error.name}
               helperText={error.name && 'Plz enter valid name'}
               fullWidth
+              value={inputs?.name}
               onChange={event => {
                 setInputs(prev => {
                   return { ...prev, name: event.target.value };
@@ -155,6 +156,7 @@ const Contact = () => {
               focused={error.email}
               helperText={error.email && 'Plz enter valid email'}
               fullWidth
+              value={inputs?.email}
               onChange={event => {
                 setInputs(prev => {
                   return { ...prev, email: event.target.value };
@@ -177,6 +179,7 @@ const Contact = () => {
               error.message && 'Plz enter message between 10-1000 character'
             }
             fullWidth
+            value={inputs?.message}
             onChange={event => {
               setInputs(prev => {
                 return { ...prev, message: event.target.value };
