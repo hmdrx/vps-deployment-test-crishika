@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 
 import SubjectModel from '../models/subject.model';
+import QuestionModel from '../models/question.model';
 import catchAsync from '../utils/catchAsync';
 import AppError from '../utils/AppError';
 
@@ -90,5 +91,23 @@ export const deleteAllSubject = catchAsync(
     await SubjectModel.deleteMany();
 
     res.status(204).end();
+  }
+);
+
+// get only question available subjects
+export const getAvailableSubject = catchAsync(
+  async (_req: Request, res: Response, _next: NextFunction) => {
+    console.log('first');
+    const subjectCodesWithQuestions = await QuestionModel.distinct(
+      'subjectCode'
+    );
+    const subjects = await SubjectModel.find({
+      code: { $in: subjectCodesWithQuestions },
+    });
+
+    res.status(200).json({
+      length: subjects.length,
+      subjects,
+    });
   }
 );
