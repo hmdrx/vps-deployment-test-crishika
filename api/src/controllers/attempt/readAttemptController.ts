@@ -66,7 +66,6 @@ export const deleteAllReadAttempt = catchAsync(
         new AppError('No documents found to delete or already deleted', 404)
       );
     }
-    console.log('first');
     await ReadAttemptModel.deleteMany({ user: req.user._id });
 
     res.status(204).end();
