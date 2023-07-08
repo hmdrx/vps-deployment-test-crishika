@@ -24,15 +24,6 @@ function formatDate(date: Date) {
 
   return `${date.getDate()} ${monthName}`;
 }
-// function formatDate(date: Date) {
-//   return `${date.getFullYear()}-${padNumber(date.getMonth() + 1)}-${padNumber(
-//     date.getDate()
-//   )}`;
-// }
-
-// function padNumber(number: number) {
-//   return number.toString().padStart(2, '0');
-// }
 
 const piplineFunc = (userId: string) => {
   const currentDate = new Date();
@@ -225,8 +216,50 @@ const getReadAttemptReportFunc = (userId: string) => {
 export const getQuestionAttemptReport = catchAsync(
   async (req: Request, res: Response, _next: NextFunction) => {
     const report = await getQuestionAttemptReportFunc(req.user._id);
+    const questionCount = await QuestionModel.countDocuments();
+    const questionCountSubject = await QuestionModel.aggregate([
+      {
+        $group: {
+          _id: '$subjectCode',
+          questionCount: { $sum: 1 },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          subjectCode: '$_id',
+          questionCount: 1,
+        },
+      },
+    ]);
+    const mergedData = {
+      report: [
+        {
+          totalQuestionCount: questionCount,
+          totalCorrectCount: report[0]?.totalCorrectCount,
+          totalIncorrectCount: report[0]?.totalIncorrectCount,
+          totalSkippedCount: report[0]?.totalSkippedCount,
+          practiceSubject: report[0]?.practiceSubject.map(
+            (subject: {
+              subjectCode: any;
+              correctCount: any;
+              incorrectCount: any;
+              skippedCount: any;
+            }) => ({
+              subjectCode: subject.subjectCode,
+              correctCount: subject.correctCount,
+              incorrectCount: subject.incorrectCount,
+              skippedCount: subject.skippedCount,
+              questionCount: questionCountSubject.find(
+                count => count.subjectCode === subject.subjectCode
+              ).questionCount,
+            })
+          ),
+        },
+      ],
+    };
     res.status(200).json({
-      ...report[0],
+      ...mergedData.report[0],
     });
   }
 );
@@ -312,8 +345,50 @@ export const getQuestionAttemptReportAndProgress = catchAsync(
     const questionResults = await QuestionAttemptModel.aggregate(pipeline);
     const data = getWeeklyProgress(questionResults);
     const report = await getQuestionAttemptReportFunc(req.user._id);
+    const questionCount = await QuestionModel.countDocuments();
+    const questionCountSubject = await QuestionModel.aggregate([
+      {
+        $group: {
+          _id: '$subjectCode',
+          questionCount: { $sum: 1 },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          subjectCode: '$_id',
+          questionCount: 1,
+        },
+      },
+    ]);
+    const mergedData = {
+      report: [
+        {
+          totalQuestionCount: questionCount,
+          totalCorrectCount: report[0]?.totalCorrectCount,
+          totalIncorrectCount: report[0]?.totalIncorrectCount,
+          totalSkippedCount: report[0]?.totalSkippedCount,
+          practiceSubject: report[0]?.practiceSubject.map(
+            (subject: {
+              subjectCode: any;
+              correctCount: any;
+              incorrectCount: any;
+              skippedCount: any;
+            }) => ({
+              subjectCode: subject.subjectCode,
+              correctCount: subject.correctCount,
+              incorrectCount: subject.incorrectCount,
+              skippedCount: subject.skippedCount,
+              questionCount: questionCountSubject.find(
+                count => count.subjectCode === subject.subjectCode
+              ).questionCount,
+            })
+          ),
+        },
+      ],
+    };
     res.status(200).json({
-      ...report[0],
+      ...mergedData.report[0],
       practiceWeeklyProgress: data,
     });
   }
@@ -383,12 +458,6 @@ export const getAllReportAtOnce = catchAsync(
     const questionData = getWeeklyProgress(questionResults);
     const questionReport = await getQuestionAttemptReportFunc(req.user._id);
 
-    // Read
-    const readReport = await getReadAttemptReportFunc(req.user._id);
-    const readPipeline = piplineFunc(req.user._id);
-    const readResults = await ReadAttemptModel.aggregate(readPipeline);
-    const readData = getWeeklyProgress(readResults);
-
     const questionCount = await QuestionModel.countDocuments();
     const questionCountSubject = await QuestionModel.aggregate([
       {
@@ -405,10 +474,43 @@ export const getAllReportAtOnce = catchAsync(
         },
       },
     ]);
-    const mergedData = {
+    const mergedDataQuestion = {
+      report: [
+        {
+          // totalQuestionCount: questionCount,
+          totalCorrectCount: questionReport[0]?.totalCorrectCount,
+          totalIncorrectCount: questionReport[0]?.totalIncorrectCount,
+          totalSkippedCount: questionReport[0]?.totalSkippedCount,
+          practiceSubject: questionReport[0]?.practiceSubject.map(
+            (subject: {
+              subjectCode: any;
+              correctCount: any;
+              incorrectCount: any;
+              skippedCount: any;
+            }) => ({
+              subjectCode: subject.subjectCode,
+              correctCount: subject.correctCount,
+              incorrectCount: subject.incorrectCount,
+              skippedCount: subject.skippedCount,
+              questionCount: questionCountSubject.find(
+                count => count.subjectCode === subject.subjectCode
+              ).questionCount,
+            })
+          ),
+        },
+      ],
+    };
+
+    // Read
+    const readReport = await getReadAttemptReportFunc(req.user._id);
+    const readPipeline = piplineFunc(req.user._id);
+    const readResults = await ReadAttemptModel.aggregate(readPipeline);
+    const readData = getWeeklyProgress(readResults);
+
+    const mergedDataRead = {
       readReport: [
         {
-          totalQuestionCount: questionCount,
+          // totalQuestionCount: questionCount,
           totalReadCount: readReport[0]?.totalReadCount,
           totalImportantReadCount: readReport[0]?.totalImportantReadCount,
           readSubject: readReport[0]?.readSubject.map(
@@ -430,9 +532,10 @@ export const getAllReportAtOnce = catchAsync(
     };
 
     res.status(200).json({
-      ...questionReport[0],
+      totalQuestionCount: questionCount,
+      ...mergedDataQuestion.report[0],
       practiceWeeklyProgress: questionData,
-      ...mergedData.readReport[0],
+      ...mergedDataRead.readReport[0],
       readWeeklyProgress: readData,
     });
   }
