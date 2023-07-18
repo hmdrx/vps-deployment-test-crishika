@@ -344,10 +344,7 @@ export const protect = catchAsync(
       id: string;
     };
     const currentUser = await UserModel.findById(decoded.id);
-    if (!currentUser)
-      return next(
-        new AppError('user belonging to this token does no longer exists', 401)
-      );
+    if (!currentUser) return next(new AppError('Session expired', 440));
     req.user = currentUser;
     next();
   }
