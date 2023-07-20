@@ -451,6 +451,7 @@ export const getReadReportAndProgress = catchAsync(
 export const getAllReportAtOnce = catchAsync(
   async (req: Request, res: Response, _next: NextFunction) => {
     //question
+    console.log(req, 'reqq');
     const questionPipeline = piplineFunc(req.user._id);
     const questionResults = await QuestionAttemptModel.aggregate(
       questionPipeline
