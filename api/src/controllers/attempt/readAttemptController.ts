@@ -34,7 +34,6 @@ export const createReadAttempt = catchAsync(
     });
     // Filter out any null values from the reads array
     const validReads = reads.filter((read: Object | null) => read !== null);
-    console.log('validReads', validReads);
     const alldata = await ReadAttemptModel.bulkWrite(validReads);
 
     res.status(201).json({

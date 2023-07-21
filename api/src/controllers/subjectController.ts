@@ -97,7 +97,6 @@ export const deleteAllSubject = catchAsync(
 // get only question available subjects
 export const getAvailableSubject = catchAsync(
   async (_req: Request, res: Response, _next: NextFunction) => {
-    console.log('first');
     const subjectCodesWithQuestions = await QuestionModel.distinct(
       'subjectCode'
     );

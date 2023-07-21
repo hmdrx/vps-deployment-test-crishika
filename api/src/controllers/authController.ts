@@ -274,7 +274,7 @@ export const login = catchAsync(
     const user = await UserModel.findOne({ mobile });
 
     if (!user) {
-      return next(new AppError(`seems you didn't register yet`, 400));
+      return next(new AppError('seems you didn not register yet', 400));
     }
     if (!user.active)
       return next(
@@ -306,7 +306,7 @@ export const appLogin = catchAsync(
     const user = await UserModel.findOne({ mobile });
 
     if (!user) {
-      return next(new AppError(`seems you didn't register yet`, 400));
+      return next(new AppError('seems you did not register yet', 400));
     }
     if (!user.active)
       return next(
@@ -325,6 +325,7 @@ export const appLogin = catchAsync(
     // res.cookie('jwt', token);
     res.status(200).json({
       token,
+      user,
     });
   }
 );
