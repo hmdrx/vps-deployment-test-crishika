@@ -6,7 +6,15 @@ import catchAsync from '../utils/catchAsync';
 import AppError from '../utils/AppError';
 
 export const createSubject = catchAsync(
-  async (req: Request, res: Response, _next: NextFunction) => {
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { subject, code } = req.body;
+    const existsSub = await SubjectModel.findOne({
+      $or: [{ subject }, { code }],
+    });
+    console.log(existsSub);
+    if (existsSub) {
+      return next(new AppError('Subject or Subject code already exists.', 409));
+    }
     const newCat = await SubjectModel.create(req.body);
 
     res.status(200).json({

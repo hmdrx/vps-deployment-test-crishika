@@ -1,5 +1,5 @@
 import express from 'express';
-import { protect } from '../controllers/authController';
+import { protect, restrictTo } from '../controllers/authController';
 import {
   getQuestion,
   getAllQuestion,
@@ -13,14 +13,16 @@ import {
 
 const router = express.Router();
 
+router.use(protect);
+router.route('/practice').post(getPracticeQuestion);
+router.route('/read').post(getReadQuestion);
+
+router.use(restrictTo('admin'));
 router
   .route('/')
-  .get(protect, getAllQuestion)
+  .get(getAllQuestion)
   .post(createQuestion)
   .delete(deleteAllQuestion);
-
-router.route('/practice').post(protect, getPracticeQuestion);
-router.route('/read').post(protect, getReadQuestion);
 router
   .route('/:id')
   .get(getQuestion)

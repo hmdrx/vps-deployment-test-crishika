@@ -3,7 +3,7 @@ import mongoose, { Document } from 'mongoose';
 interface ISubject extends Document {
   subject: string;
   code: number;
-  icon: string;
+  image: string;
 }
 
 // Define a schema for the category collection
@@ -13,7 +13,7 @@ const subjectSchema = new mongoose.Schema<ISubject>({
     required: [true, 'Must add category'],
   },
   code: Number,
-  icon: String,
+  image: String,
 });
 
 // Define a model for the category collection

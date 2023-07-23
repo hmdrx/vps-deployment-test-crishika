@@ -321,11 +321,20 @@ export const appLogin = catchAsync(
     const token = jwt.sign({ id }, process.env.JWT_SECRETE!, {
       expiresIn: process.env.JWT_EXPIRES_IN!,
     });
-
+    const {
+      password: ps,
+      role,
+      otp_valid,
+      _id,
+      active,
+      __v,
+      verified,
+      ...others
+    } = user.toObject();
     // res.cookie('jwt', token);
     res.status(200).json({
       token,
-      user,
+      user: others,
     });
   }
 );
