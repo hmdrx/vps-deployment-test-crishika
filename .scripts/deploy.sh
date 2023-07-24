@@ -13,5 +13,6 @@ sudo npm install --yes
 #Build command
 echo "Project Build"
 sudo npm run build
+pm2 restart all
 
 echo "Deployment finished"
