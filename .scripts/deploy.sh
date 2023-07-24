@@ -10,4 +10,8 @@ echo "Installing dependencies..."
 cd /api
 npm install --yes
 
+#Build command
+echo "Project Build"
+npm run build
+
 echo "Deployment finished"
