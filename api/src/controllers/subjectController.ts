@@ -43,9 +43,7 @@ export const getSubject = catchAsync(
 );
 export const getAllSubject = catchAsync(
   async (_req: Request, res: Response, _next: NextFunction) => {
-    const subjects = await SubjectModel.find().select(
-      'subject code image -_id'
-    );
+    const subjects = await SubjectModel.find();
 
     res.status(200).json({
       length: subjects.length,
@@ -61,16 +59,18 @@ export const updateSubject = catchAsync(
       return next(new AppError('no such subject found to update', 404));
     }
 
-    subject.subject = req.body.subject;
-    if (req.body.code) {
-      subject.code = req.body.code;
-    }
-    subject.save();
+    const updatedSub = await SubjectModel.findByIdAndUpdate(
+      req.params.id,
+      { ...req.body },
+      {
+        new: true,
+      }
+    );
 
     res.status(200).json({
       status: 'success',
       data: {
-        subject,
+        subject: updatedSub,
       },
     });
   }
