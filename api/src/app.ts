@@ -21,7 +21,6 @@ import path from 'path';
 const app: Application = express();
 
 // middleware
-
 app.use(cors());
 app.use(compression());
 
