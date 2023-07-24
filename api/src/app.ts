@@ -16,7 +16,7 @@ import readRouter from './routes/attempt/readAttempt.routes';
 import questionAttemptRouter from './routes/attempt/questionAttempt.routes';
 import reportRouter from './routes/attempt/report.routes';
 import inquiryRouter from './routes/inquiry.routes';
-import path from 'path';
+// import path from 'path';
 
 const app: Application = express();
 
@@ -38,7 +38,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.use(express.json({ limit: '10kb' }));
-app.use(express.static(path.join(__dirname, '..', '..', 'client', 'build')));
+// app.use(express.static(path.join(__dirname, '..', '..', 'client', 'build')));
 
 app.use('/api/v1/question', questionsRouter);
 app.use('/api/v1/user', userRouter);
