@@ -46,6 +46,7 @@ app.use(express.static(path.join(__dirname, '..', '..', 'client', 'build')));
 //   );
 
 // });
+
 app.use('/api/v1/question', questionsRouter);
 app.use('/api/v1/user', userRouter);
 app.use('/api/v1/subject', subjectRouter);
