@@ -85,13 +85,9 @@ export const resetAppPasswordSendOtp = catchAsync(
     const { mobile } = req.body;
 
     const user = await UserModel.findOne({ mobile: +mobile });
-    if (!user)
-      return next(
-        new AppError(
-          'there is no user with this mobile plz enter correct mobile number',
-          401
-        )
-      );
+    if (!user) return next(new AppError('No user found!', 401));
+    if (!user.active)
+      return next(new AppError('Deactivated or deleted account!', 401));
 
     const generatedOtp = generateOTP(4);
 
