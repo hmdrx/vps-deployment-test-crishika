@@ -41,7 +41,7 @@ const userSchema = new mongoose.Schema<IUser>({
   password: {
     type: String,
     required: [true, 'Please enter password'],
-    minlength: 8,
+    minlength: 6,
   },
   verified: {
     type: Boolean,
