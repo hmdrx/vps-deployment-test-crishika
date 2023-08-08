@@ -21,11 +21,9 @@ const handleValidationErrorDB = (err: MongooseError.ValidationError) => {
   return new AppError(message, 404);
 };
 
-const handleJWTError = () =>
-  new AppError('Invalid token. Please log in again!', 440);
+const handleJWTError = () => new AppError('Invalid token!', 440);
 
-const handleJWTExpiredError = () =>
-  new AppError('Session Expired. Please login again!', 440);
+const handleJWTExpiredError = () => new AppError('Session Expired!', 440);
 
 const sendErrorDev = (err: AppError, res: Response) => {
   res.status(err.statusCode).json({
