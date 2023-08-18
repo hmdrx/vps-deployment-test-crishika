@@ -4,6 +4,7 @@ import express, { Application } from 'express';
 import cors from 'cors';
 import compression from 'compression';
 const rateLimit = require('express-rate-limit');
+import cookieParser from 'cookie-parser';
 
 // module import
 import globalErrorHandler from './controllers/errorController';
@@ -16,6 +17,7 @@ import readRouter from './routes/attempt/readAttempt.routes';
 import questionAttemptRouter from './routes/attempt/questionAttempt.routes';
 import reportRouter from './routes/attempt/report.routes';
 import inquiryRouter from './routes/inquiry.routes';
+import protesterRouter from './routes/protester.routes';
 // import path from 'path';
 
 const app: Application = express();
@@ -24,6 +26,7 @@ const app: Application = express();
 
 app.use(cors());
 app.use(compression());
+app.use(cookieParser());
 
 const limiter = rateLimit({
   max: 2, // 2 request per IP in 24 Hours
@@ -47,6 +50,7 @@ app.use('/api/v1/read-attempt', readRouter);
 app.use('/api/v1/question-attempt', questionAttemptRouter);
 app.use('/api/v1/report', reportRouter);
 app.use('/api/v1/inquiry', inquiryRouter);
+app.use('/api/v1/protester', protesterRouter);
 app.use('*', (_req, res, _next) => {
   res.status(404).json({
     message: 'Page Not Found!',
